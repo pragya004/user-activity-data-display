@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import zIndex from "@material-ui/core/styles/zIndex"
+import React, {useEffect, useState, lazy, Suspense} from "react"
+import "./App.css"
+
+
+const UserDisplay = lazy(() => import("./Components/UserDisplay"))
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [userData, setUserData] = useState([])
+
+    async function fetchdata()
+    {
+        const data = await fetch('https://proxy-server-weatherapi.herokuapp.com/members') 
+        const jsonData = await data.json()
+        console.log(jsonData)
+        setUserData(jsonData)
+    }
+
+    useEffect(()=>{
+        fetchdata()
+    },[])
+
+    return (
+        <div className="mainDiv" style={{position:"relative",height:"100vh",width:"100vw", overflow:"hidden"}}>
+    
+            <div className="rectangle"></div>
+            <div className="circle"></div>
+    
+            
+            <div className="displayTable">
+                <Suspense fallback={<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>}>
+                    <UserDisplay userData = {userData} />
+                </Suspense> 
+            </div>
+            
+        </div>
+    );
+    
 }
 
 export default App;
