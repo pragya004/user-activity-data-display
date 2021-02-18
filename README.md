@@ -10,5 +10,5 @@ Additionally user can also click on the calendar input and select date for which
 1. Since the data is fetched from an external api, hence lazy loading was also integrated because in a slower network(3G/2G) data fetch may be slow.
 2. The data is fetched only once and is stored in a state which is then used by the other components to do various tasks and display different data.
 
-###### *Live demo**
+###### **Live demo**
 https://user-activity-data-display.herokuapp.com/
