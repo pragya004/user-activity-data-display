@@ -121,7 +121,7 @@ const useStyles = makeStyles(theme => (
                     {console.log(userData)}
                     {
                         userData.map(row => (
-                            <TableRow hover key={row.id} onClick = {()=> { setCurrentID(row.id); getOneUserData(row.id,dateToday)}}>
+                            <TableRow hover style={{cursor:"pointer"}} key={row.id} onClick = {()=> { setCurrentID(row.id); getOneUserData(row.id,dateToday)}}>
                                 <TableCell>{row.real_name}</TableCell>
                                 <TableCell><Chip label={row.tz} color="primary"/></TableCell>
                             </TableRow>
