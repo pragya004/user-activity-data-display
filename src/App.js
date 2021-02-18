@@ -6,19 +6,18 @@ import "./App.css"
 const UserDisplay = lazy(() => import("./Components/UserDisplay"))
 
 function App() {
-    const [userData, setUserData] = useState([])
+    // const [userData, setUserData] = useState([])
 
-    async function fetchdata()
-    {
-        const data = await fetch('https://proxy-server-weatherapi.herokuapp.com/members') 
-        const jsonData = await data.json()
-        console.log(jsonData)
-        setUserData(jsonData)
-    }
+    // async function fetchdata()
+    // {
+    //     const data = await fetch('https://proxy-server-weatherapi.herokuapp.com/members') 
+    //     const jsonData = await data.json()
+    //     setUserData(jsonData)
+    // }
 
-    useEffect(()=>{
-        fetchdata()
-    },[])
+    // useEffect(()=>{
+    //     fetchdata()
+    // },[])
 
     return (
         <div className="mainDiv" style={{position:"relative",height:"100vh",width:"100vw", overflow:"hidden"}}>
@@ -29,7 +28,8 @@ function App() {
             
             <div className="displayTable">
                 <Suspense fallback={<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>}>
-                    <UserDisplay userData = {userData} />
+                    {/* <UserDisplay userData = {userData} /> */}
+                    <UserDisplay />
                 </Suspense> 
             </div>
             

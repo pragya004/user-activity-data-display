@@ -19,7 +19,20 @@ const useStyles = makeStyles(theme => (
         },
     }));
 
-  export default function UserDisplay({userData}) {
+    export default function UserDisplay() {
+
+        const [userData, setUserData] = useState([])
+
+        async function fetchdata()
+        {
+            const data = await fetch('https://proxy-server-weatherapi.herokuapp.com/members') 
+            const jsonData = await data.json()
+            setUserData(jsonData)
+        }
+
+        useEffect(()=>{
+            fetchdata()
+        },[])
       
     const [singleUserData, setSingleUserData] = useState(null)
     const [currentID, setCurrentID] = useState(null)
@@ -94,6 +107,7 @@ const useStyles = makeStyles(theme => (
     },[selectedDate])
 
     return (
+    (userData.length === 0 ? null : 
     <div style={{width:"40%"}}>
         <TableContainer component = {Paper}>
             <Table aria-label = "simple table">
@@ -104,6 +118,7 @@ const useStyles = makeStyles(theme => (
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {console.log(userData)}
                     {
                         userData.map(row => (
                             <TableRow hover key={row.id} onClick = {()=> { setCurrentID(row.id); getOneUserData(row.id,dateToday)}}>
@@ -177,6 +192,6 @@ const useStyles = makeStyles(theme => (
                 </div>
             </div>
         </Modal>
-    </div>
+    </div>)
     )
 }
